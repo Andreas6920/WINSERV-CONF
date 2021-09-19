@@ -1,0 +1,32 @@
+﻿Firstname;Lastname;Title;Initials;e-mail account;Department;Company;Branch;Manager;ADOU
+Carl;Plysher;3D Operator;capl;CaPl@aplast3d.com;3D Production;Auto 3D Plast;London;;OU=Users,OU=UK
+Donald;Christensen;3D Operator;doch;DoCh@aplast3d.com;3D Production;Auto 3D Plast;London;;OU=Users,OU=UK
+Susan;Lewitt;3D Operator;sule;SuLe@aplast3d.com;3D Production;Auto 3D Plast;London;;OU=Users,OU=UK
+Britt;Manson;3D Teamleader;brma;BrMa@aplast3d.com;3D Production;Auto 3D Plast;London;;OU=Users,OU=UK
+Jasper;Jansson;Production Manager;jaja;JaJa@aplast3d.com;3D Production;Auto 3D Plast;London;;OU=Users,OU=UK
+Jasper;Hornslet;Customer Supporter;jaho;JaHo@aplast3d.com;Customer Support;Auto 3D Plast;London;;OU=Users,OU=UK
+Meredith;Grocket;accountant;megr;MeGr@aplast3d.com;Economics Department;Auto 3D Plast;London;;OU=Users,OU=UK
+Paul;Bridgehead;IT Manager;pabr;PaBr@aplast3d.com;IT Department;Auto 3D Plast;London;JoBa@aplast3d.com;OU=Users,OU=UK
+Martin;Welsh;IT Supporter;mawe;MaWe@aplast3d.com;IT Department;Auto 3D Plast;London;;OU=Users,OU=UK
+Josh;Baxter;CEO;Joba;JoBa@aplast3d.com;Management;Auto 3D Plast;London;;OU=Users,OU=UK
+Jack;Johnson;CFO;jajo;JaJo@aplast3d.com;Management;Auto 3D Plast;London;JoBa@aplast3d.com;OU=Users,OU=UK
+Marie;Benton;CTO;mabe;MaBe@aplast3d.com;Management;Auto 3D Plast;London;JoBa@aplast3d.com;OU=Users,OU=UK
+Patryk;Cywinski;Facility Manager;PaCy;Pacy@aplast3d.com;Management;Auto 3D Plast;Poland;JoBa@aplast3d.com;OU=Users,OU=PL
+Lis;Taylor;Designer RD;lita;LiTa@aplast3d.com;Research & Development;Auto 3D Plast;London;;OU=Users,OU=UK
+Morgan;Wanderset;Designer RD;mowa;MoWa@aplast3d.com;Research & Development;Auto 3D Plast;London;;OU=Users,OU=UK
+Norman;Cronwell;RD manager - Engineer;nocr;NoCr@aplast3d.com;Research & Development;Auto 3D Plast;London;;OU=Users,OU=UK
+Cliff;Hurton;Software RD;clhu;ClHu@aplast3d.com;Research & Development;Auto 3D Plast;London;;OU=Users,OU=UK
+Elisabeth;HuckleBerry;Technical Designer RD;elhu;ElHu@aplast3d.com;Research & Development;Auto 3D Plast;London;;OU=Users,OU=UK
+Alex;Dreesen;Internal Salesman;aldr;AlDr@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Erik;Bailey;Internal Salesman;erba;ErBa@aplast3d.com;Sales;Auto 3D Plast;Denmark;;OU=Users,OU=DK
+Josh;Brandon;Internal Salesman;jobr;JoBr@aplast3d.com;Sales;Auto 3D Plast;Denmark;;OU=Users,OU=DK
+Mary;Tulason;Internal Salesman;matu;MaTu@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Minica;Stephensen;Internal Salesman;most;MoSt@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Phillip;Devore;Internal Salesman;phde;PhDe@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Hjalte;Kristiansen;International Salesman;hjkr;HjKr@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Rhys;Wright;Sales Manager;rhwr;RhWr@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+David;Connoly;Salesman;daco;daCo@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Lewis;Carpenter;Salesman;leca;LeCa@aplast3d.com;Sales;Auto 3D Plast;Denmark;;OU=Users,OU=DK
+Peter;Bastian;Salesman;peba;PeBa@aplast3d.com;Sales;Auto 3D Plast;Denmark;;OU=Users,OU=DK
+Sandra;Bruun;Salesman;sabr;SaBr@aplast3d.com;Sales;Auto 3D Plast;London;;OU=Users,OU=UK
+Juan;Mendoza;Stock Worker;jume;JuMe@aplast3d.com;Warehouse;Auto 3D Plast;London;;OU=Users,OU=UK
