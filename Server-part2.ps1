@@ -56,7 +56,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         mkdir "C:\domainusers\" -force | out-null
         Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/domain_users.csv" -UseBasicParsing -OutFile $csvfil
         
-        #LÃ¦s csv fil
+        #Læs csv fil
         $Users = Import-Csv -Delimiter ";" -Path $csvfil
         write-host "`t`tCSV fil er placeret i" $csvfil -f green
         write-host "`t`tRediger denne efter behov og tast enter når den er færdig" -f green
@@ -68,7 +68,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     Write-Host "`t`t`tOU OPRETTELSE:" -f Green
     foreach($user in $users)
     {
-    ##Lav vÃ¦rdierne i .csv filen til variabler
+    ##Lav værdierne i .csv filen til variabler
     $rootou=(Get-ADDomain).DistinguishedName 
     $oupath = $user.ADOU+','+$rootou
 
@@ -106,7 +106,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     Write-Host "`t`t`tBRUGER OPRETTELSE:" -f Green
     foreach($user in $users)
     {
-    ##Lav vÃ¦rdierne i .csv filen til variabler##
+    ##Lav værdierne i .csv filen til variabler##
     $oupath = $user.ADOU+','+(Get-ADDomain).DistinguishedName
     $firstName = $user.firstname
     $lastName = $user.Lastname
@@ -196,7 +196,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         
     
     
-    #Lav shares i den oprettede mappe, SÃ¦t NTFS + Share rettigheder
+    #Lav shares i den oprettede mappe, Sæt NTFS + Share rettigheder
     
     New-Item -ItemType Directory -Force -Path $SharePath\General | out-null
     $Users = Import-Csv -Delimiter ";" -Path "C:\domainusers\domain_users.csv"

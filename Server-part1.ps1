@@ -1,5 +1,5 @@
 CLS
-## PART 1 - OPSÃ†TNING
+## PART 1 - OPSætTNING
 
     ## PART 1.1 - COMPUTERNAME
     CLS
