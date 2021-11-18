@@ -62,9 +62,9 @@ CLS
         "";
         Write-Host "`t`t`t Current IP Settings:" -f yellow
         Write-Host "`t`t`t Adapter:`t`t`t`t`t`t`t  "$ethernetadaptername
-        Write-Host "`t`t`t"$currentip
+        Write-Host "`t`t"$currentip
         Write-Host "`t`t`t Subnet:`t`t`t`t`t`t`t  "$currentsubnet
-        Write-Host "`t`t`t"$currentgateway[0];"";
+        Write-Host "`t`t"$currentgateway[0];"";
         
 
         ### Enter New adapter settings
@@ -101,15 +101,19 @@ CLS
     
     #Prepairing reboot
         #Download next script
+        start-sleep -s 3 #Waiting for new DNS to respond
         [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-        $jobpath = 'C:\ProgramData\1.ps1'
-        (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/Server-part2.ps1" -UseBasicParsing).content > $jobpath
+        $jobpath = 'C:\ProgramData\dc-setup.ps1'
+        Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/Server-part2.ps1" -OutFile $jobpath -UseBasicParsing
         #Setting to start after reboot
-        $name = 'winoptimizer-app-Updater'
-        $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-nop -W hidden -noni -ep bypass -file $jobpath"
-        $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM"-LogonType ServiceAccount -RunLevel Highest
-        $trigger = New-ScheduledTaskTrigger -AtStartup
+        $name = 'dc-setup'
+        $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ep bypass -file $jobpath"
+        $principal = New-ScheduledTaskPrincipal -UserId $env:username -LogonType ServiceAccount -RunLevel Highest
+        $trigger = New-ScheduledTaskTrigger -AtLogOn
         Register-ScheduledTask -TaskName $Name  -Principal $principal -Action $action -Trigger $trigger -Force | Out-Null 
 
         Write-Host "`t`tComputer is renamed, rebooting in 5 seconds.." -f yellow; sleep -s 5;
         Restart-Computer -Force }
+
+
+        New-ScheduledTaskTrigger -AtLogOn
