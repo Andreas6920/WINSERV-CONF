@@ -1,46 +1,3 @@
-CLS
-## PART 2 - AD ROLLE OPSÊTNING
-Write-host "PART 2.1 - AD Install"
-
-    ###################################################################
-    ########  Rolle installation
-    #####
-
-    Write-host "`tPART 2.1 - AD Install"
-    Do {
-            Write-Host "`t`tWould you like to deploy a active directory? (y/n)" -nonewline -f green;
-            $answer = Read-Host " " 
-            Switch ($answer) { 
-                Y {
-                    #install AD
-                    $WarningPreference = "SilentlyContinue"
-                    Install-WindowsFeature AD-Domain-Services -IncludeManagementTools | out-null
-                    Write-Host "`t`t`t`tPlease choose a domain name:" -nonewline -f yellow;
-                    $domainname = Read-Host " " 
-                    Import-Module ADDSDeployment
-                    Install-ADDSForest `
-                    -CreateDnsDelegation:$false `
-                    -DatabasePath "C:\Windows\NTDS" `
-                    -DomainMode "WinThreshold" `
-                    -DomainName $domainname `
-                    -DomainNetbiosName ($domainname.split(".")[0]).ToUpper() `
-                    -ForestMode "WinThreshold" `
-                    -Confirm:$false `
-                    -SafeModeAdministratorPassword (ConvertTo-SecureString -AsPlainText "p@ssw0rd" -Force) `
-                    -InstallDns:$true `
-                    -LogPath "C:\Windows\NTDS" `
-                    -NoRebootOnCompletion:$false `
-                    -SysvolPath "C:\Windows\SYSVOL" `
-                    -Force:$true
-                    $WarningPreference = "Continue"
-
-
-                }              
-                N {Write-Host "`t`t`tNO - This step will be skipped." -f red; $reboot = $false} 
-    
-            }   
-    } While ($answer -notin "y", "n")   
-
 ## PART 2.2 - AD KONFIGURATION
 Write-host "`tPART 2.2 - AD Konfiguration"
 
@@ -59,7 +16,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         #L√¶s csv fil
         $Users = Import-Csv -Delimiter ";" -Path $csvfil
         write-host "`t`tCSV fil er placeret i" $csvfil -f green
-        write-host "`t`tRediger denne efter behov og tast enter nÂr den er fÊrdig" -f green
+        write-host "`t`tRediger denne efter behov og tast enter n√•r den er f√¶rdig" -f green
         read-host ‚Äú`t`tPress ENTER to continue...‚Äù
 
     ###################################################################

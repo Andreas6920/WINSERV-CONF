@@ -98,5 +98,18 @@ CLS
     } }While ($answer -notin "y", "n")
     
     if ($reboot -eq $true){
+    
+    $jobpath = 'C:\ProgramData\1.ps1'
+    (Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/Server-part2.ps1").content > $jobpath
+    $name = 'winoptimizer-app-Updater'
+    $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-nop -W hidden -noni -ep bypass -file $jobpath"
+    $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM"-LogonType ServiceAccount -RunLevel Highest
+    $trigger = New-ScheduledTaskTrigger -AtStartup
+    Register-ScheduledTask -TaskName $Name  -Principal $principal -Action $action -Trigger $trigger -Force | Out-Null
+
+    
+    
+    
+    
     Write-Host "`t`tComputer is renamed, rebooting in 5 seconds.." -f yellow; sleep -s 5;
     Restart-Computer -Force }
