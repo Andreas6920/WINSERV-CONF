@@ -49,11 +49,17 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     #####
 
     ### STEP 2.2.1 - SOURCE CSV FILE
-    $csvfilepath = "C:\domainusers\domain_users.csv"
-    $Users = Import-Csv -Delimiter ";" -Path $csvfilepath
-    write-host "`t`tCSV fil er placeret i" $csvfilepath -f green
-    write-host "`t`tRediger denne efter behov og tast enter når den er færdig" -f green
-    read-host “`t`tPress ENTER to continue...”
+        #Download csv fil
+        $csvmappe = "C:\domainusers\" 
+        $csvfil = "C:\domainusers\domain_users.csv"
+        mkdir "C:\domainusers\" -force | out-null
+        Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/domain_users.csv" -UseBasicParsing -OutFile $csvfil
+        #Læs csv fil
+        $Users = Import-Csv -Delimiter ";" -Path $csvfil
+        
+        write-host "`t`tCSV fil er placeret i" $csvfil -f green
+        write-host "`t`tRediger denne efter behov og tast enter når den er færdig" -f green
+        read-host “`t`tPress ENTER to continue...”
 
     ###################################################################
     ########  OU OPRETTELSE
