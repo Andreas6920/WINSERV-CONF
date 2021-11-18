@@ -34,6 +34,11 @@ CLS
     "";
     Write-host "PART 1.2 - IP CONFIGURATION"
     Do {
+    Write-Host "`t`tCHOOSE NETWORK ADAPTER:" -f yellow; sleep -s 2;
+    "";Write-Host "`t`t`t Your Network Adapters:" -f yellow
+    $nic = Get-NetIPAddress -AddressFamily IPv4
+    foreach ($n in $nic){write-host "`t`t`t" $n.InterfaceAlias "( IP:" $n.IPAddress")"}"";
+    sleep -s 2
     Write-Host "`tWould you like to change your IP? (y/n)" -nonewline -f green;
     $answer = Read-Host " " 
     Switch ($answer) { 
@@ -41,12 +46,8 @@ CLS
         ### Choice Network Adapter
         
         Do {
-            Write-Host "`t`tCHOOSE NETWORK ADAPTER:" -f yellow; sleep -s 2;
-            "";Write-Host "`t`t`t Your Network Adapters:" -f yellow
-            $nic = Get-NetIPAddress -AddressFamily IPv4
-            foreach ($n in $nic){write-host "`t`t`t" $n.InterfaceAlias "( IP:" $n.IPAddress")"}"";
-            sleep -s 2
-            Write-Host "`t`t`t Please enter the NAME of the primary network card" -nonewline -f yellow;
+
+            Write-Host "`t`t`t Please enter the NAME of the primary network interface card" -nonewline -f yellow;
             $ethernetadaptername = Read-Host " " 
             } While ($ethernetadaptername -notin ((Get-NetIPAddress -AddressFamily IPv4).InterfaceAlias)) 
 
@@ -61,7 +62,7 @@ CLS
         $currentDNS = (Get-DnsClientServerAddress -InterfaceAlias Ethernet0).ServerAddresses
         "";
         Write-Host "`t`t`t Current IP Settings:" -f yellow
-        Write-Host "`t`t`t Adapter:`t`t`t`t`t`t`t  "$ethernetadaptername
+        Write-Host "`t`t`t Interface Name:`t`t`t`t`t`t`t  "$ethernetadaptername
         Write-Host "`t`t"$currentip
         Write-Host "`t`t`t Subnet:`t`t`t`t`t`t`t  "$currentsubnet
         Write-Host "`t`t"$currentgateway[0];"";
@@ -81,7 +82,7 @@ CLS
         "";
         Write-Host "`t`tNEW CONFIGURATION IS BEING SET:" -f yellow;
         Write-Host "`t`t`t - Clearing current settings.." -f yellow;
-        Set-ItemProperty -Path “HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$((Get-NetAdapter -InterfaceAlias $ethernetadaptername).InterfaceGuid)” -Name EnableDHCP -Value 0 -ea SilentlyContinue
+        Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$((Get-NetAdapter -InterfaceAlias $ethernetadaptername).InterfaceGuid) -Name EnableDHCP -Value 0 -ea SilentlyContinue
         Remove-NetIpAddress -InterfaceAlias $ethernetadaptername -AddressFamily IPv4 -Confirm:$false -ErrorAction SilentlyContinue
         Remove-NetRoute -InterfaceAlias $ethernetadaptername -AddressFamily IPv4 -Confirm:$false -ErrorAction SilentlyContinue
         sleep -s 2
