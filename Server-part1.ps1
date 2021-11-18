@@ -62,9 +62,9 @@ CLS
         "";
         Write-Host "`t`t`t Current IP Settings:" -f yellow
         Write-Host "`t`t`t Adapter:`t`t`t`t`t`t`t  "$ethernetadaptername
-        Write-Host "`t`t"$currentip
+        Write-Host "`t`t`t"$currentip
         Write-Host "`t`t`t Subnet:`t`t`t`t`t`t`t  "$currentsubnet
-        Write-Host "`t`t"$currentgateway[0];"";
+        Write-Host "`t`t`t"$currentgateway[0];"";
         
 
         ### Enter New adapter settings
