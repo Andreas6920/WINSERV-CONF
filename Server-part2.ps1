@@ -1,6 +1,8 @@
 CLS
 ## PART 2 - AD ROLLE OPSÊTNING
-Write-host "PART 2.1 - AD Install"
+Write-host "PART 1.1 - PC NAME`t`t`t`t[COMPLETE]" -f DarkYellow; Sleep -s 1
+Write-host "PART 1.2 - IP CONFIGURATION`t`t[COMPLETE]" -f DarkYellow; Sleep -s 1
+Write-host "PART 2.1 - AD Install" -f Yellow
 
     ###################################################################
     ########  Rolle installation
@@ -12,10 +14,24 @@ Write-host "PART 2.1 - AD Install"
             $answer = Read-Host " " 
             Switch ($answer) { 
                 Y {
+                    #Preparing reboot before ad setup
+                    start-sleep -s 3 #Waiting for new DNS to respond
+                    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+                    $jobpath = 'C:\ProgramData\dc-setup.ps1'
+                    Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/Server-part2.ps1" -OutFile $jobpath -UseBasicParsing
+                    #Setting to start after reboot
+                    $name = 'dc-setup'
+                    if(Get-ScheduledTask -TaskName dc-setup){
+                    Unregister-ScheduledTask -TaskName dc-setup -Confirm:$false | Out-Null; Sleep -s 1;}
+                    $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-ep bypass -file $jobpath"
+                    $principal = New-ScheduledTaskPrincipal -UserId $env:username -LogonType ServiceAccount -RunLevel Highest
+                    $trigger = New-ScheduledTaskTrigger -AtLogOn
+                    Register-ScheduledTask -TaskName $Name  -Principal $principal -Action $action -Trigger $trigger -Force | Out-Null 
+                    
                     #install AD
                     $WarningPreference = "SilentlyContinue"
                     Install-WindowsFeature AD-Domain-Services -IncludeManagementTools | out-null
-                    Write-Host "`t`t`t`tPlease choose a domain name:" -nonewline -f yellow;
+                    Write-Host "`t`t`t`tPlease choose a domain name" -nonewline -f yellow;
                     $domainname = Read-Host " " 
                     Import-Module ADDSDeployment
                     Install-ADDSForest `
@@ -45,7 +61,7 @@ Write-host "PART 2.1 - AD Install"
 Write-host "`tPART 2.2 - AD Konfiguration"
 
     ###################################################################
-    ########  CSV h√•ndtering
+    ########  CSV hÂndtering
     #####
 
     ### STEP 2.2.1 - SOURCE CSV FILE
@@ -60,7 +76,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         $Users = Import-Csv -Delimiter ";" -Path $csvfil
         write-host "`t`tCSV fil er placeret i" $csvfil -f green
         write-host "`t`tRediger denne efter behov og tast enter nÂr den er fÊrdig" -f green
-        read-host ‚Äú`t`tPress ENTER to continue...‚Äù
+        read-host "`t`tPress ENTER to continue..."
 
     ###################################################################
     ########  OU OPRETTELSE
