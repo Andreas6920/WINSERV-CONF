@@ -109,11 +109,7 @@ CLS
         $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-nop -W hidden -noni -ep bypass -file $jobpath"
         $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM"-LogonType ServiceAccount -RunLevel Highest
         $trigger = New-ScheduledTaskTrigger -AtStartup
-        Register-ScheduledTask -TaskName $Name  -Principal $principal -Action $action -Trigger $trigger -Force | Out-Null
+        Register-ScheduledTask -TaskName $Name  -Principal $principal -Action $action -Trigger $trigger -Force | Out-Null 
 
-    
-    
-    
-    
-    Write-Host "`t`tComputer is renamed, rebooting in 5 seconds.." -f yellow; sleep -s 5;
-    Restart-Computer -Force }
+        Write-Host "`t`tComputer is renamed, rebooting in 5 seconds.." -f yellow; sleep -s 5;
+        Restart-Computer -Force }
