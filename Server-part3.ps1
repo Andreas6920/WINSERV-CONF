@@ -17,7 +17,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         $Users = Import-Csv -Delimiter ";" -Path $csvfil
         write-host "`t`tCSV fil er placeret i" $csvfil -f green
         write-host "`t`tRediger denne efter behov og tast enter når den er færdig" -f green
-        read-host “`t`tPress ENTER to continue...”
+        read-host `t`tPress ENTER to continue...�
 
     ###################################################################
     ########  OU OPRETTELSE

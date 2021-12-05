@@ -13,8 +13,7 @@ Write-host "PART 2.1 - AD Install" -f Yellow
             Write-Host "`t`tWould you like to deploy a active directory? (y/n)" -nonewline -f green;
             $answer = Read-Host " " 
             Switch ($answer) { 
-                Y {
-                    #Preparing reboot before ad setup
+                Y { #Preparing reboot before ad setup
                     start-sleep -s 3 #Waiting for new DNS to respond
                     [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
                     $jobpath = 'C:\ProgramData\dc-setup.ps1'
@@ -49,8 +48,6 @@ Write-host "PART 2.1 - AD Install" -f Yellow
                     -SysvolPath "C:\Windows\SYSVOL" `
                     -Force:$true
                     $WarningPreference = "Continue"
-
-
                 }              
                 N {Write-Host "`t`t`tNO - This step will be skipped." -f red; $reboot = $false} 
     
@@ -134,7 +131,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     $email = $user.'e-mail account'
     $username = $user.Initials
     
-    ##Tjek om brugere eksistere, fÃ¸r de oprettes##
+    ##Tjek om brugere eksistere, før de oprettes##
     $Userexists = Get-ADUser -Filter {sAMAccountName -eq $Username}
     
     If ($Userexists -eq $Null)
@@ -200,7 +197,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         $answer = Read-Host " " 
         Switch ($answer) { 
             Y {
-    #Lav en mappe til Ã¸nskede shares
+    #Lav en mappe til ønskede shares
     
     $Path = "C:\"
     $Name = "user_shares"
