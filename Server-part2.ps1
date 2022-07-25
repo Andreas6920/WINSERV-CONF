@@ -1,5 +1,5 @@
 CLS
-## PART 2 - AD ROLLE OPSæTNING
+## PART 2 - AD ROLLE OPSï¿½TNING
 Write-host "PART 1.1 - PC NAME`t`t`t`t[COMPLETE]" -f DarkYellow; Sleep -s 1
 Write-host "PART 1.2 - IP CONFIGURATION`t`t[COMPLETE]" -f DarkYellow; Sleep -s 1
 Write-host "PART 2.1 - AD Install" -f Yellow
@@ -58,7 +58,7 @@ Write-host "PART 2.1 - AD Install" -f Yellow
 Write-host "`tPART 2.2 - AD Konfiguration"
 
     ###################################################################
-    ########  CSV håndtering
+    ########  CSV hï¿½ndtering
     #####
 
     ### STEP 2.2.1 - SOURCE CSV FILE
@@ -69,10 +69,10 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         mkdir "C:\domainusers\" -force | out-null
         Invoke-WebRequest -uri "https://raw.githubusercontent.com/Andreas6920/WINSERV-CONF/main/domain_users.csv" -UseBasicParsing -OutFile $csvfil
         
-        #Læs csv fil
+        #Lï¿½s csv fil
         $Users = Import-Csv -Delimiter ";" -Path $csvfil
         write-host "`t`tCSV fil er placeret i" $csvfil -f green
-        write-host "`t`tRediger denne efter behov og tast enter når den er færdig" -f green
+        write-host "`t`tRediger denne efter behov og tast enter nï¿½r den er fï¿½rdig" -f green
         read-host "`t`tPress ENTER to continue..."
 
     ###################################################################
@@ -81,7 +81,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     Write-Host "`t`t`tOU OPRETTELSE:" -f Green
     foreach($user in $users)
     {
-    ##Lav værdierne i .csv filen til variabler
+    ##Lav vï¿½rdierne i .csv filen til variabler
     $rootou=(Get-ADDomain).DistinguishedName 
     $oupath = $user.ADOU+','+$rootou
 
@@ -119,7 +119,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     Write-Host "`t`t`tBRUGER OPRETTELSE:" -f Green
     foreach($user in $users)
     {
-    ##Lav værdierne i .csv filen til variabler##
+    ##Lav vï¿½rdierne i .csv filen til variabler##
     $oupath = $user.ADOU+','+(Get-ADDomain).DistinguishedName
     $firstName = $user.firstname
     $lastName = $user.Lastname
@@ -131,7 +131,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     $email = $user.'e-mail account'
     $username = $user.Initials
     
-    ##Tjek om brugere eksistere, før de oprettes##
+    ##Tjek om brugere eksistere, fï¿½r de oprettes##
     $Userexists = Get-ADUser -Filter {sAMAccountName -eq $Username}
     
     If ($Userexists -eq $Null)
@@ -155,7 +155,6 @@ Write-host "`tPART 2.2 - AD Konfiguration"
     write-host "`t`t`tBRUGER: " -f yellow -NoNewline ;
     write-host "[COMPLETE]" -f Green
     "";
-
     ###################################################################
     ########  SECURITY GROUP OPRETTELSE
     #####
@@ -197,7 +196,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         $answer = Read-Host " " 
         Switch ($answer) { 
             Y {
-    #Lav en mappe til ønskede shares
+    #Lav en mappe til ï¿½nskede shares
     
     $Path = "C:\"
     $Name = "user_shares"
@@ -209,7 +208,7 @@ Write-host "`tPART 2.2 - AD Konfiguration"
         
     
     
-    #Lav shares i den oprettede mappe, Sæt NTFS + Share rettigheder
+    #Lav shares i den oprettede mappe, Sï¿½t NTFS + Share rettigheder
     
     New-Item -ItemType Directory -Force -Path $SharePath\General | out-null
     $Users = Import-Csv -Delimiter ";" -Path "C:\domainusers\domain_users.csv"
